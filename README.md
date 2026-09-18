@@ -6,6 +6,14 @@ VRChat向け髪調整を、軽い数値ループと必要時だけの目視確�
 
 ## 最短の使い方
 
+Codex Desktopでは、リポジトリを開いて次の一言で始められます。
+
+```text
+$hairflow 肩の跳ね上がった毛先を自然な流れに直して
+```
+
+`AGENTS.md` とリポジトリ内Skillにより、Blender MCPを会話から直接実行せず、下記の `hairflow.py` だけを入口にします。プロジェクトを信頼済みにすると `.codex/hooks.json` も直MCP呼び出しをブロックします。
+
 Blender MCP Serverを起動してから、PowerShellで実行します。
 
 ```powershell
@@ -41,4 +49,3 @@ python tools\promote.py --source "D:\path\fixed.blend" --version v002
 `.blend` は商品データを含むためGit管理対象外です。リポジトリの外へ公開・配布しないでください。
 
 詳しい運用は [docs/WORKFLOW.md](docs/WORKFLOW.md)、現在の判断基準は [docs/KNOWLEDGE.md](docs/KNOWLEDGE.md) を参照してください。
-

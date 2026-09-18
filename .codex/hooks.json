@@ -1,0 +1,19 @@
+{
+  "description": "Keep Blender communication inside the versioned hairflow bridge.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^mcp__.*[Bb]lender.*$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/block_direct_blender_mcp.py",
+            "command_windows": "python .codex\\hooks\\block_direct_blender_mcp.py",
+            "timeout": 10,
+            "statusMessage": "Enforcing Hairflow MCP boundary"
+          }
+        ]
+      }
+    ]
+  }
+}

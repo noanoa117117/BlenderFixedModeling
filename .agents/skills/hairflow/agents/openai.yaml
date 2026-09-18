@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hairflow"
+  short_description: "Run the controlled Blender hair adjustment loop"
+  default_prompt: "Use the repository hair workflow for this adjustment."

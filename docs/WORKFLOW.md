@@ -1,5 +1,11 @@
 # 運用フロー
 
+## MCP境界
+
+Blenderへの通信は `tools/hairflow.py` に集約する。会話からBlender MCPツールや使い捨てPythonを直接呼ばない。新しい操作は、先に版管理した `blender/` または `canonical/` のスクリプトにしてから `hairflow.py` のサブコマンドとして公開する。
+
+`.codex/hooks.json` は、Codexが直接Blender MCPツールを呼ぶ経路を停止する。これは安全網であり、通常の作業入口は `AGENTS.md` と `$hairflow` Skillである。
+
 ## 1. 安い編集ループ
 
 日常の変更はスクリプトとMCPだけで回します。
@@ -60,4 +66,3 @@ python tools\hairflow.py view left
 - 再現: `hair_vNNN.py` が版スナップショットの6メッシュを現在の作業シーンへ置き換える。
 
 これにより、手動作業の速さと、結果を何度でも戻せる再現性を両立します。
-
