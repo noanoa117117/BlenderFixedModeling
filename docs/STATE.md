@@ -2,10 +2,14 @@
 
 ## Accepted version
 
-- Version: `v001`
-- Artifact: `artifacts/Lasyusha-v001.blend`
+- Version: `v002`
+- Artifact: `artifacts/Lasyusha-v002.blend`
 - Source work file: `Lasyusha-ShoulderFlow-Fixed.blend`
 - Date: 2026-09-18
+
+`v002` is a reproducibility-only update. It preserves the accepted `v001`
+geometry and adds `ShoulderWisps_Subtle` as the seventh managed hair mesh, so a
+restore can recreate that object and its armature setup if it is missing.
 
 ## What is good
 
@@ -23,6 +27,8 @@
 
 ## Next practical step
 
-次に形状を触る前に開いているシーンと未保存編集を確認する。保存版に戻す必要がある場合だけ `v001` を再適用する。肩や襟の修正は全景と拡大の両方で確認する。
+次に形状を触る前に開いているシーンと未保存編集を確認する。保存版に戻す必要がある場合だけ `v002` を再適用する。肩や襟の修正は全景と拡大の両方で確認する。
 
-2026-09-18のリポジトリ作成時、開いていたBlender GUIは古い `Lasyusha-SurfaceLocal-Stage12.blend` だった。未保存状態を壊さないため自動適用はしていない。これは当時の記録で、現在の状態は作業再開時に確認する。
+2026-09-19: Computer Useで現在の `Lasyusha-ShoulderFlow-Fixed.blend` を確認。形状変更は行わず、補完毛束を含めた7メッシュの復元を修正した。優先順位は大きな毛束の折れ、目立つ浮き・大きな貫通、毛先の順。微小な貫通は許容する。
+
+古い下書き・バックアップ45個と旧v001スナップショットを削除。現在の作業ファイル、v002、比較用baselineを残した。Unity側が本体であり、Blenderは下書きとして扱う。

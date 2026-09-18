@@ -1,9 +1,15 @@
 {
+  "Lasyusha-v002.blend": {
+    "sha256": "aba1a54fe580fbeb28c7d4dd0cd270c84a4e472e7666424932ecd2649dabeb85",
+    "bytes": 28768416,
+    "source": "Lasyusha-ShoulderFlow-Fixed.blend",
+    "status": "accepted-reproducibility-fix"
+  },
   "Lasyusha-v001.blend": {
     "sha256": "81b52edb7f152e0317cb106e363bb549f38eb1a2293eab9d51a3adb2d56d6cda",
     "bytes": 32932129,
     "source": "Lasyusha-ShoulderFlow-Fixed.blend",
-    "status": "accepted"
+    "status": "removed-after-v002-verification"
   },
   "Lasyusha-baseline.blend": {
     "sha256": "ed7d1bc111f1945ec5388b02350555bf6aa5746bbadb243b084952b11a39086c",

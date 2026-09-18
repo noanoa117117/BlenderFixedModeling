@@ -41,11 +41,14 @@ python tools\promote.py --source "D:\path\fixed.blend" --version v002
 
 ## 現在の正本
 
-- バージョン: `v001`
-- 適用スクリプト: `canonical/hair_v001.py`
-- ローカル版スナップショット: `artifacts/Lasyusha-v001.blend`
+- バージョン: `v002`
+- 適用スクリプト: `canonical/hair_v002.py`
+- ローカル版スナップショット: `artifacts/Lasyusha-v002.blend`
 - 元の比較用スナップショット: `artifacts/Lasyusha-baseline.blend`
 - 元作業ファイル: `Lasyusha-ShoulderFlow-Fixed.blend`
+
+`v002` は見た目の形状変更を含みません。`ShoulderWisps_Subtle` を7個目の
+復元対象に加え、欠落時もアーマチュア設定を含めて保存版から再作成します。
 
 `.blend` は商品データを含むためGit管理対象外です。リポジトリの外へ公開・配布しないでください。
 
