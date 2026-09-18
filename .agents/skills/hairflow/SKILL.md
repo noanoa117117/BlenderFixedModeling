@@ -1,16 +1,14 @@
 ---
 name: hairflow
-description: Run the controlled Blender hair adjustment loop in BlenderHairWorkflow. Use for hair shape, fit, penetration, or silhouette corrections in this repository.
+description: Adjust Blender hair shape, fit, penetration, and silhouette using the saved versions and visual criteria in BlenderHairWorkflow.
 ---
 
 # Hairflow
 
-Use this repository's controlled edit loop. The goal is a natural hairstyle that follows clothing where required, without recreating the commercial source data.
+このSkillを含むリポジトリを作業場所とし、ルートの `AGENTS.md` に従って依頼された髪の修正を進める。
 
-1. Read `config/project.json`, `docs/STATE.md`, and `docs/KNOWLEDGE.md`.
-2. Use `python tools/hairflow.py status` before changing the current version.
-3. Make repeatable changes in the versioned canonical script or a versioned Blender script, then run `apply` and `validate` through `tools/hairflow.py`.
-4. Use Computer Use only when `gate --silhouette-changed --unresolved-visual` requires visual confirmation. Inspect all relevant sides and close-ups.
-5. For a manual correction, save a new `.blend` and run `tools/promote.py` so the edit becomes the next reproducible version.
+通常はAstraが一貫して進め、Computer Use・MCP・既存CLIを必要に応じて選ぶ。画面やMCPで直した結果はPythonに自動反映されないため、保存した修正版 `.blend` を次版の基準にする。
 
-Do not call Blender MCP tools directly and do not send ad-hoc Blender Python through MCP. `tools/hairflow.py` is the only Blender communication bridge. If it lacks an operation, add a tested, versioned operation before using it.
+`python tools/hairflow.py` の `status` は保存版の確認、`apply` は保存版の適用、`validate` はメッシュ数値の照合、`view <angle>` は視点設定に使う。すべてを毎回実行する手順ではない。
+
+完了条件は、指摘された不自然さが改善し、周囲に新しい跳ね・折れ・浮きがなく、確認した結果を次版として保存できていること。結果と未確認事項を短く伝える。

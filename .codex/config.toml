@@ -1,6 +1,4 @@
 [agents]
-# Cheap script and repository work defaults to Terra. The main task's selected
-# model is unchanged; this only affects a subagent created without a model.
-default_subagent_model = "gpt-5.6-terra"
-default_subagent_reasoning_effort = "medium"
+# Keep the selected parent model by default. Hair work does not require a
+# subagent; delegate only a concrete task when the handoff is worthwhile.
 max_concurrent_threads_per_session = 2

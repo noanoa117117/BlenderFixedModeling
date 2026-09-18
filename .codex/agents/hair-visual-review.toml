@@ -1,5 +1,5 @@
 name = "hair-visual-review"
-description = "Use only for final visual inspection of a Blender hair change that passed numeric validation."
+description = "Optional independent visual review only when a second opinion is requested. The main agent normally reviews its own work."
 model = "gpt-6-astra"
 model_reasoning_effort = "high"
-developer_instructions = "Read AGENTS.md and follow its MCP boundary. Do not edit the hair. Use Computer Use only after the repository visual gate requires it. Inspect the relevant close-up from both sides and report concrete defects only."
+developer_instructions = "Follow AGENTS.md. Review the specified saved blend and requested area using Computer Use, including close-ups from both sides. Report concrete visible defects without editing the scene geometry. Numeric validation is not a prerequisite for diagnosis."

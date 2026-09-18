@@ -1,36 +1,13 @@
-# Hair workflow instructions
+# Hair workflow
 
-このリポジトリで髪を調整するエージェントは、最初に `config/project.json`、`docs/STATE.md`、`docs/KNOWLEDGE.md` を読む。
+髪調整を始めるときは `docs/STATE.md`、`docs/KNOWLEDGE.md`、`config/project.json` を読む。同じ作業中は変更がない限り読み直さない。
 
-## MCPの入口
+- 原型の毛流れと服に沿う自然さを優先する。作業方法はスクリプト・Computer Useのうち早く確実なものを選ぶ。
+- 通常はAstraが修正・目視・保存まで続けて担当する。Computer Useを基本に、早ければ既存CLIや直MCPも使える。工程ごとにTerraへ渡して往復させない。
+- `apply` は保存版のメッシュへの置換。対象シーンと未保存編集を確認し、復元や版の適用が必要なときだけ実行する。
+- 形状変更の仕上がりはComputer Useで確認する。局所は前後から拡大し、完了前には周囲一周の外形も見る。数値検証は見た目や貫通の合格を意味しない。
+- Computer Use・直MCPの変更は、既存Pythonに自動反映されない。現在のシーンを別名保存し、`tools/promote.py` で次版へ昇格する。意図的に毛先を削った場合は、変更を確認してから期待頂点数などを更新する。
+- Terraへ引き継ぐ必要がある場合は、修正版 `.blend` の絶対パス、変更箇所、確認結果・未確認事項を渡す。修正版を新しい基準として取り込み、古いPythonの `apply` で上書きしない。手操作を無理にPythonの頂点操作へ翻訳する必要はない。
+- 文書・スクリプトだけの変更でBlenderを起動しない。必要な検証が済めば同じ検証を繰り返さない。小さな修正のためだけにエージェントを分ける必要はない。
 
-- Blender MCPツールを会話から直接呼ばない。`python tools/hairflow.py ...` だけをBlenderへの入口にする。
-- MCPで実行する新しい処理が必要なら、先に `blender/` または `canonical/` に版管理するスクリプトとして追加し、`hairflow.py` 経由で実行・検証できる形にする。
-- 直書きしたBlender Python、使い捨てのソケット接続、MCPの実行コードを会話から送らない。
-- 手動編集はComputer Useで行ってよい。ただし保存後は `tools/promote.py` で次版の正本に昇格する。
-
-最短の依頼は `$hairflow <修正内容>`。Skillがこのルールと通常ループを読み込む。
-
-## 通常ループ
-
-1. `canonical/hair_vNNN.py` または次版候補を編集する。
-2. `python tools/hairflow.py apply` でBlenderへ適用する。
-3. `python tools/hairflow.py validate` でオブジェクト数、頂点数、寸法を確認する。
-4. 数値で直せる問題はComputer Useを起動せず修正する。
-5. シルエットへ影響する変更があり、数値では判断できない項目が残る場合のみComputer Useで確認する。
-
-## Computer Useの確認
-
-- `python tools/hairflow.py view <angle>` で視点を固定する。
-- 通常は `front`, `front-right`, `right`, `back`, `left` を見る。
-- 肩や襟の修正では、問題箇所を拡大し、前寄り・後ろ寄りの両方から見る。
-- 明らかな跳ね上がり、輪、鋭い折れ、空中の隙間は不合格にする。
-- 全景だけの確認で合格扱いにしない。
-
-## Blenderで直接編集した場合
-
-手動編集は許可する。作業後に別名保存し、`tools/promote.py` で次版スナップショットと正本適用スクリプトを作る。手動編集だけを残して正本との差を放置しない。
-
-## 範囲
-
-髪のモデリング、形状調整、髪マテリアルまで。Unityへの反映、衣装自体の編集、リギングとアニメーションは別タスク。
+対象は髪の形状・フィット・マテリアル。商品データを含む `.blend` はローカルに保持する。詳しい操作例は必要時に `docs/WORKFLOW.md` を参照する。

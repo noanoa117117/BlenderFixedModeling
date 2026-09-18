@@ -1,68 +1,33 @@
 # 運用フロー
 
-## MCP境界
+## 状況に応じて使うコマンド
 
-Blenderへの通信は `tools/hairflow.py` に集約する。会話からBlender MCPツールや使い捨てPythonを直接呼ばない。新しい操作は、先に版管理した `blender/` または `canonical/` のスクリプトにしてから `hairflow.py` のサブコマンドとして公開する。
+リポジトリのルートで実行する。Blenderへ通信するコマンドにはBlender側のサーバーが必要。
 
-`.codex/hooks.json` は、Codexが直接Blender MCPツールを呼ぶ経路を停止する。これは安全網であり、通常の作業入口は `AGENTS.md` と `$hairflow` Skillである。
+| コマンド | 用途 |
+| --- | --- |
+| `python tools/hairflow.py status` | ローカル保存版とハッシュの確認。開いているBlenderシーンは確認しない |
+| `python tools/hairflow.py apply` | 保存版で対象6メッシュを置換。作業中の編集を保全し、復元・版適用が必要なときだけ実行 |
+| `python tools/hairflow.py validate` | 頂点数などを期待値と照合。貫通・見た目の検査ではない |
+| `python tools/hairflow.py view front-right --closeup` | 確認用の視点設定 |
+| `python tools/promote.py --source "D:/path/fixed.blend" --version v002` | 保存した修正版を新しいローカル版と適用スクリプトに登録 |
 
-## 1. 安い編集ループ
+## 修正と確認
 
-日常の変更はスクリプトとMCPだけで回します。
+スクリプトとComputer Useのうち、対象を自然に直しやすい方法を選ぶ。手動編集のためにもComputer Useを使える。変更箇所を前後両側から拡大し、仕上げに周囲一周の外形を確認する。各微調整のたびに全方向を撮り直す必要はない。
 
-```powershell
-python tools\hairflow.py apply
-python tools\hairflow.py validate
-```
+`gate --silhouette-changed --unresolved-visual` は任意の補助コマンドで、内部で `validate` を再実行する。直前に検証済みなら重ねて呼ぶ必要はない。数値不一致の原因調査や初期状態の確認にもComputer Useを使える。
 
-エラー、頂点数、オブジェクト数、寸法はこの段階で解決します。スクリーンショットは取りません。
+毛先の削除などで頂点数が変わることはある。差分が意図どおりかを確認して期待値を更新し、再検証する。エラーを消すためだけに期待値を合わせない。
 
-## 2. 視覚確認ゲート
+手動修正は作業前後に別名保存し、修正版を `promote.py` で昇格する。期待値と `docs/STATE.md`、`CHANGELOG.md` に必要な変更だけ記録する。`templates/review.md` は複数人への引き継ぎに必要なときだけ使う。
 
-次の条件をすべて満たす場合だけComputer Useを使います。
+## 保存と通信
 
-1. `apply` が成功した。
-2. `validate` が成功した。
-3. 前回確認以降に外形や毛流れへ影響する変更が入った。
-4. 跳ね、折れ、量感、隙間など数値で決められない問題が残る。
+Gitにはスクリプトと判断理由を保存し、商品データを含む `.blend` はローカルに保持する。`canonical/hair_vNNN.py` は保存版を適用するもので、毎回髪を生成するスクリプトではない。
 
-```powershell
-python tools\hairflow.py gate --silhouette-changed --unresolved-visual
-```
+通常はAstraがComputer Useを中心に修正・確認・保存まで続けて担当する。既存CLIや直接のMCP呼び出しも使える。以前の直MCP禁止hookとTerraへの既定モデル指定は撤去した。
 
-## 3. 視点固定と目視
+Computer Use・直MCPで変えたシーンは、既存のPythonや保存版と異なる状態になる。別名保存するまで `apply` しない。修正版 `.blend` を昇格して新しい適用スクリプトの参照先にすることで、手操作の結果も再現可能になる。
 
-```powershell
-python tools\hairflow.py view front
-python tools\hairflow.py view front-right
-python tools\hairflow.py view right
-python tools\hairflow.py view back
-python tools\hairflow.py view left
-```
-
-局所修正では `--closeup` を使い、Computer Useで対象へ寄せます。全景だけで合格にしません。肩の毛先は前寄りと後ろ寄りの両側から確認します。
-
-## 4. 手動修正
-
-形状が明らかにおかしく、頂点を直接動かす方が早い場合はBlenderで手動修正して構いません。
-
-1. 作業前に別名保存する。
-2. Blenderで少数の頂点・束に限定して直す。
-3. 同じ問題箇所を拡大し、反対側の角度でも確認する。
-4. 修正版を新しい `.blend` として保存する。
-5. `tools/promote.py` で次版へ昇格する。
-6. `config/project.json` の期待値と `CHANGELOG.md` を更新する。
-
-## 5. 修正指示
-
-指摘は [templates/review.md](../templates/review.md) の形式にします。定数名まで分からなくても、対象オブジェクト、位置、症状、望む流れを分けて書けば十分です。
-
-## 正本の考え方
-
-このリポジトリは厳密なプロシージャル生成ではありません。
-
-- Git管理: 適用スクリプト、検証スクリプト、判断理由、ノウハウ。
-- ローカル管理: 商品データを含む版スナップショット `.blend`。
-- 再現: `hair_vNNN.py` が版スナップショットの6メッシュを現在の作業シーンへ置き換える。
-
-これにより、手動作業の速さと、結果を何度でも戻せる再現性を両立します。
+Terraへ引き継ぐ場合は、修正版 `.blend` の絶対パス、変更箇所、確認結果・未確認事項を渡す。必要なら画像も添える。Terraは修正版を読み込んで次版と期待値に反映し、古いスクリプトで上書きしない。Pythonだけを読んで画面上の変更を把握したことにしない。
