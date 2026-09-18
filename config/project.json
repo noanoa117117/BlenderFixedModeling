@@ -1,0 +1,31 @@
+{
+  "project": "lasyusha-hair-fit",
+  "current_version": "v001",
+  "canonical_script": "canonical/hair_v001.py",
+  "artifact": "artifacts/Lasyusha-v001.blend",
+  "artifact_sha256": "81b52edb7f152e0317cb106e363bb549f38eb1a2293eab9d51a3adb2d56d6cda",
+  "baseline_artifact": "artifacts/Lasyusha-baseline.blend",
+  "baseline_sha256": "ed7d1bc111f1945ec5388b02350555bf6aa5746bbadb243b084952b11a39086c",
+  "mcp": {
+    "host": "127.0.0.1",
+    "port": 9876,
+    "timeout_seconds": 45
+  },
+  "hair_objects": [
+    "back",
+    "bangs side",
+    "base",
+    "side1",
+    "side2",
+    "side3"
+  ],
+  "expected": {
+    "back": {"vertices": 10462, "edges": 18322, "polygons": 7874},
+    "bangs side": {"vertices": 3120, "edges": 5444, "polygons": 2325},
+    "base": {"vertices": 449, "edges": 888, "polygons": 440},
+    "side1": {"vertices": 1289, "edges": 2186, "polygons": 898},
+    "side2": {"vertices": 594, "edges": 1054, "polygons": 460},
+    "side3": {"vertices": 691, "edges": 1221, "polygons": 531}
+  },
+  "review_angles": ["front", "front-right", "right", "back", "left"]
+}

@@ -1,0 +1,14 @@
+{
+  "Lasyusha-v001.blend": {
+    "sha256": "81b52edb7f152e0317cb106e363bb549f38eb1a2293eab9d51a3adb2d56d6cda",
+    "bytes": 32932129,
+    "source": "Lasyusha-ShoulderFlow-Fixed.blend",
+    "status": "accepted"
+  },
+  "Lasyusha-baseline.blend": {
+    "sha256": "ed7d1bc111f1945ec5388b02350555bf6aa5746bbadb243b084952b11a39086c",
+    "bytes": 28823462,
+    "source": "BeforeSurfaceLocal.blend",
+    "status": "baseline"
+  }
+}

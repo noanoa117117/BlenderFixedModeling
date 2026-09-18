@@ -1,0 +1,7 @@
+artifacts/*.blend
+artifacts/*.blend[0-9]
+sessions/*.json
+sessions/*.png
+__pycache__/
+*.pyc
+
