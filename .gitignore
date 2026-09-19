@@ -4,4 +4,6 @@ sessions/*.json
 sessions/*.png
 __pycache__/
 *.pyc
-
+artifacts/*.fbx
+artifacts/unity-*.json
+artifacts/unity-*.txt

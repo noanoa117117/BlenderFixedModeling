@@ -1,6 +1,6 @@
 ---
 name: hairflow
-description: Adjust Blender hair shape, fit, penetration, and silhouette using the saved versions and visual criteria in BlenderHairWorkflow.
+description: Adjust Blender hair shape, fit, penetration, and silhouette, or transfer the accepted hairstyle to Unity using BlenderHairWorkflow.
 ---
 
 # Hairflow
@@ -12,3 +12,5 @@ description: Adjust Blender hair shape, fit, penetration, and silhouette using t
 `python tools/hairflow.py` の `status` は保存版の確認、`apply` は保存版の適用、`validate` はメッシュ数値の照合、`view <angle>` は視点設定に使う。すべてを毎回実行する手順ではない。
 
 完了条件は、指摘された不自然さが改善し、周囲に新しい跳ね・折れ・浮きがなく、確認した結果を次版として保存できていること。結果と未確認事項を短く伝える。
+
+Unityへ反映する依頼では、[Unity転送](../../../docs/UNITY_TRANSFER.md) を先に読む。シーンで使われている実物を確認し、調整済みの見た目と骨の対応を維持する。別Prefabの配置でもよい。名前が似た過去Prefabへの差し替えを繰り返さない。
